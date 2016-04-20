@@ -8,7 +8,7 @@ services:
         links:
             - php:php
         volumes:
-            - ./logs/nginx/:/var/log/nginx
+            - ./log/nginx/:/var/log/nginx
             - ./nginx/sites:/etc/nginx/conf.d
             - ./www:/var/www
 
@@ -22,6 +22,7 @@ services:
             - ./www:/var/www
         links:
             - mariadb:mariadb
+            - memcached:memcached
 
     mariadb:
         image: mariadb
@@ -30,7 +31,13 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: toor
         volumes:
-            - ./lib/mysql:/var/lib/mysql
+            - ./log/mariadb:/var/log/mysql
+            - ./data/mariadb:/var/lib/mysql
+
+    memcached:
+        image: memcached
+        ports:
+            - "11211:11211"
 
     maildev:
         image: djfarrelly/maildev
