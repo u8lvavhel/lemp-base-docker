@@ -30,10 +30,15 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install -j$(nproc) gd
 
 # Install memcached
-RUN apt-get install -y libmemcached-dev zlib1g-dev libncurses5-dev
-RUN mkdir /usr/src/php/ext/memcached-2.2.0
-RUN cd /usr/src/php/ext &&  wget -q https://github.com/php-memcached-dev/php-memcached/archive/php7.zip && unzip php7.zip && rm php7.zip
-RUN docker-php-ext-install php-memcached-php7
+RUN apt-get install -y \
+		libmemcached-dev \
+		zlib1g-dev \
+		libncurses5-dev \
+	&& cd /usr/src/php/ext \
+	&& wget -q https://github.com/php-memcached-dev/php-memcached/archive/php7.zip \
+	&& unzip php7.zip \
+	&& rm php7.zip \
+	&& docker-php-ext-install php-memcached-php7
 
 # Install PDO
 RUN docker-php-ext-install pdo_mysql
@@ -43,10 +48,6 @@ RUN docker-php-ext-install pdo_mysql
 #         libssl-dev \
 #     && pecl install mongo \
 #     && docker-php-ext-enable mongo
-
-# #Install tools and custom php
-# RUN apt-get update && apt-get install -my \
-# 	wget
 
 # #Install adminer with pretty theme
 # RUN mkdir /var/www/adminer
