@@ -1,0 +1,38 @@
+version: '2'
+services:
+    nginx:
+        build: ./nginx
+        ports:
+            - "80:80"
+            - "443:443"
+        links:
+            - php:php
+        volumes:
+            - ./logs/nginx/:/var/log/nginx
+            - ./nginx/sites:/etc/nginx/conf.d
+            - ./www:/var/www
+
+    php:
+        build: ./php
+        ports:
+            - "9000:9000"
+        expose:
+            - '9000'
+        volumes:
+            - ./www:/var/www
+        links:
+            - mariadb:mariadb
+
+    mariadb:
+        image: mariadb
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: toor
+        volumes:
+            - ./lib/mysql:/var/lib/mysql
+
+    maildev:
+        image: djfarrelly/maildev
+        ports:
+            - "1080:80"
