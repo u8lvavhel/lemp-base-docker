@@ -8,7 +8,6 @@
 * PHP-FPM
 * Memcached
 * MariaDB
-* MongoDB
 
 ### Bonus
 

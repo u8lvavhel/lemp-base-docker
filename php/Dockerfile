@@ -44,10 +44,10 @@ RUN apt-get install -y \
 RUN docker-php-ext-install pdo_mysql
 
 # # Install mongo
-RUN apt-get install -y \
-        libssl-dev \
-    && pecl install mongodb \
-    && docker-php-ext-enable mongodb
+# RUN apt-get install -y \
+#         libssl-dev \
+#     && pecl install mongodb \
+#     && docker-php-ext-enable mongodb
 
 WORKDIR /var/www
 
