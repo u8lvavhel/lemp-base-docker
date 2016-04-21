@@ -28,5 +28,5 @@ $ ./init.sh
 ```
 
 ```sh
-$ docker-compose-up
+$ docker-compose up
 ```
