@@ -49,11 +49,6 @@ RUN apt-get install -y \
     && pecl install mongodb \
     && docker-php-ext-enable mongodb
 
-# #Install adminer with pretty theme
-# RUN mkdir /var/www/adminer
-# RUN wget http://www.adminer.org/latest.php -O /var/www/adminer/index.php
-# RUN wget https://raw.githubusercontent.com/vrana/adminer/master/designs/pappu687/adminer.css -O /var/www/adminer.css
-
 WORKDIR /var/www
 
 RUN usermod -u 1000 www-data
