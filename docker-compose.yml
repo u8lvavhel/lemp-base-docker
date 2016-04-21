@@ -23,6 +23,7 @@ services:
         links:
             - mariadb:mariadb
             - memcached:memcached
+            - mongo:mongo
 
     mariadb:
         image: mariadb
@@ -38,6 +39,13 @@ services:
         image: memcached
         ports:
             - "11211:11211"
+
+    mongo:
+        image: mongo
+        ports: 
+            - "27017:27017"
+        volumes:
+            - ./data/mongo:/data/db
 
     maildev:
         image: djfarrelly/maildev
