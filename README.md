@@ -8,17 +8,13 @@
 * PHP-FPM
 * Memcached
 * MariaDB
+* Redis
+* Elasticsearch
 
 ### Bonus
 
 * MailDev
 * Adminer (with init.sh)
-
-### TODO
-
-* Redis
-* Elasticsearch
-* ...
 
 # Start using
 
