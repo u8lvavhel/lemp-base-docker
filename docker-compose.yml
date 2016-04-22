@@ -24,6 +24,7 @@ services:
             - mariadb:mariadb
             - memcached:memcached
             - redis:redis
+            - elasticsearch:elasticsearch
 
     mariadb:
         image: mariadb
@@ -49,3 +50,9 @@ services:
         image: djfarrelly/maildev
         ports:
             - "1080:80"
+
+    elasticsearch:
+        image: elasticsearch
+        ports:
+            - "9200:9200"
+            - "9300:9300"
