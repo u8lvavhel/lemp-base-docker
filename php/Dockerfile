@@ -2,14 +2,14 @@ FROM php:7.0-fpm
 
 # Install packages
 RUN apt-get update && apt-get install -my \
-  curl \
-  wget \
-  zip
+    curl \
+    wget \
+    zip
 
 # Install curl
 RUN apt-get install -y \
-    	libcurl4-openssl-dev \
-	&& docker-php-ext-install -j$(nproc) curl
+        libcurl4-openssl-dev \
+    && docker-php-ext-install -j$(nproc) curl
 
 # Install mcrypc
 RUN apt-get install -y \
@@ -31,23 +31,24 @@ RUN apt-get install -y \
 
 # Install memcached
 RUN apt-get install -y \
-		libmemcached-dev \
-		zlib1g-dev \
-		libncurses5-dev \
-	&& cd /usr/src/php/ext \
-	&& wget -q https://github.com/php-memcached-dev/php-memcached/archive/php7.zip \
-	&& unzip php7.zip \
-	&& rm php7.zip \
-	&& docker-php-ext-install php-memcached-php7
+        libmemcached-dev \
+        zlib1g-dev \
+        libncurses5-dev \
+    && cd /usr/src/php/ext \
+    && wget -q https://github.com/php-memcached-dev/php-memcached/archive/php7.zip \
+    && unzip php7.zip \
+    && rm php7.zip \
+    && docker-php-ext-install php-memcached-php7
+
+# Install redis
+RUN cd /usr/src/php/ext \
+    &&wget -q https://github.com/phpredis/phpredis/archive/php7.zip \
+    && unzip php7.zip \
+    && rm php7.zip \
+    && docker-php-ext-install phpredis-php7
 
 # Install PDO
-RUN docker-php-ext-install pdo_mysql
-
-# # Install mongo
-# RUN apt-get install -y \
-#         libssl-dev \
-#     && pecl install mongodb \
-#     && docker-php-ext-enable mongodb
+RUN docker-php-ext-install pdo_mysql mysqli
 
 WORKDIR /var/www
 
